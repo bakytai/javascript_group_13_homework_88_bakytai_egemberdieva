@@ -3,6 +3,7 @@ const multer = require('multer');
 const { nanoid } = require('nanoid');
 const path = require('path');
 const config = require('../config');
+const auth = require("../middleware/auth");
 const Post = require('../models/Post');
 
 const router = express.Router();
@@ -28,7 +29,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', upload.single('image'), async (req, res, next) => {
+router.post('/', auth, upload.single('image'), async (req, res, next) => {
     try {
         if (!req.body.title) {
             return res.status(400).send({message: 'Title are required'});
@@ -41,7 +42,7 @@ router.post('/', upload.single('image'), async (req, res, next) => {
         const newDate = new Date().toISOString();
 
         const postData = {
-            user: req.body.user,
+            user: req.user._id,
             date: newDate,
             title: req.body.title,
             description: req.body.description,
@@ -56,7 +57,7 @@ router.post('/', upload.single('image'), async (req, res, next) => {
 
         await post.save();
 
-        return res.send({message: 'Created new product', id: post._id});
+        return res.send({message: 'Created new post', id: post._id});
     } catch (e) {
         next(e);
     }
