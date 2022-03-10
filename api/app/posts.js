@@ -62,3 +62,5 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
         next(e);
     }
 });
+
+module.exports = router;
