@@ -15,7 +15,7 @@ import {
 
 @Injectable()
 
-export class PostsEffects {
+export class CommentsEffects {
   fetchComments = createEffect(() => this.actions.pipe(
     ofType(fetchCommentsRequest),
     mergeMap(({id}) => this.commentsService.getComments(id).pipe(

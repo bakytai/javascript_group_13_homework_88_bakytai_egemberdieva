@@ -1,7 +1,9 @@
+import { User } from './user.model';
+
 export class Comment {
   constructor(
     public id: string,
-    public user: string,
+    public user: User,
     public text: string,
   ) {}
 }
@@ -13,7 +15,7 @@ export interface CommentData {
 
 export interface ApiCommentData {
   _id: string,
-  user: string,
+  user: User,
   post: string,
   text: string,
 }

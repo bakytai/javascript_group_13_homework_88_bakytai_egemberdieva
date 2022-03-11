@@ -1,7 +1,9 @@
+import { User } from './user.model';
+
 export class Post {
   constructor(
     public id: string,
-    public user: string,
+    public user: User,
     public date: string,
     public title: string,
     public description: string,
@@ -18,7 +20,7 @@ export interface PostData {
 
 export interface ApiPostData {
   _id: string,
-  user: string,
+  user: User,
   date: string,
   title: string,
   description: string,

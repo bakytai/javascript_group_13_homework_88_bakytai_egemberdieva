@@ -4,6 +4,7 @@ import { Comment } from '../models/comment.model';
 
 export type PostState = {
   posts: Post[],
+  post: Post | null,
   fetchLoading: boolean,
   fetchError: null | string,
   createLoading: boolean,

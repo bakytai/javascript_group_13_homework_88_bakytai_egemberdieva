@@ -1,1 +1,12 @@
-<p>posts works!</p>
+<div fxLayout="row">
+  <mat-card class="example-card card" *ngFor="let post of posts | async">
+    <mat-card-title-group>
+      <mat-card-title>Author: {{ post.user.displayName }}</mat-card-title>
+      <mat-card-subtitle class="title"> {{ post.title }}</mat-card-subtitle>
+    </mat-card-title-group>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <a [routerLink]="['/post/',post.id]" mat-raised-button color="primary">Read more...</a>
+      <span>Posted: {{ post.date }}</span>
+    </div>
+  </mat-card>
+</div>

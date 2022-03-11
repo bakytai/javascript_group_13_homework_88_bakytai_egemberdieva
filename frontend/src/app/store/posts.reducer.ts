@@ -9,16 +9,16 @@ import {
 } from './posts.actions';
 import { PostState } from './types';
 
-
 const initialState: PostState = {
   posts: [],
+  post: null,
   fetchLoading: false,
   fetchError: null,
   createLoading: false,
   createError: null,
 };
 
-export const productsReducer = createReducer(
+export const postsReducer = createReducer(
   initialState,
   on(fetchPostsRequest, state => ({...state, fetchLoading: true})),
   on(fetchPostsSuccess, (state, {posts}) => ({...state, fetchLoading: false, posts})),
