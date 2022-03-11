@@ -67,7 +67,7 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
 
         await post.save();
 
-        return res.send({message: 'Created new post', id: post._id});
+        return res.send(post);
     } catch (e) {
         next(e);
     }

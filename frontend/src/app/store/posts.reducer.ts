@@ -37,7 +37,7 @@ export const postsReducer = createReducer(
   })),
 
   on(createPostsRequest, state => ({...state, createLoading: true})),
-  on(createPostsSuccess, state => ({...state, createLoading: false})),
+  on(createPostsSuccess, (state, {post})=> ({...state, createLoading: false, post})),
   on(createPostsFailure, (state, {error}) => ({
     ...state,
     createLoading: false,

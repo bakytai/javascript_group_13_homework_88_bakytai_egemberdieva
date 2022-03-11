@@ -1,24 +1,52 @@
-<div>
-  <mat-card class="example-card card">
-    <mat-card-title-group>
-      <mat-card-title>Author: {{ postInfo.user.displayName }}</mat-card-title>
-      <mat-card-subtitle class="title"> {{ postInfo.title }}</mat-card-subtitle>
-      <mat-card-subtitle> {{ postInfo.description }}</mat-card-subtitle>
-    </mat-card-title-group>
-    <div fxLayout="row" fxLayoutAlign="space-between">
-      <span>Posted: {{ postInfo.date }}</span>
-    </div>
-  </mat-card>
-
-  <h2>Comments:</h2>
-
-  <div fxLayout="row">
-    <mat-card class="example-card card" *ngFor="let comments of comments | async">
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <div style="width: 50%">
+    <mat-card class="example-card card" *ngIf="postInfo">
       <mat-card-title-group>
-        <mat-card-title>Author: {{ comments.user.displayName }}</mat-card-title>
-        <mat-card-subtitle class="title"> {{ comments.text }}</mat-card-subtitle>
+        <mat-card-title>Author: {{ postInfo.user.displayName }}</mat-card-title>
+        <mat-card-subtitle class="title"> {{ postInfo.title }}</mat-card-subtitle>
       </mat-card-title-group>
+      <mat-card-content>
+        Description: {{ postInfo.description }}
+      </mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <span><b>Posted: {{ postInfo.date }}</b></span>
+      </div>
     </mat-card>
+
+    <h2>Comments:</h2>
+
+    <div fxLayout="row">
+      <mat-card class="example-card comment" *ngFor="let comment of comments | async">
+        <mat-card-title-group>
+          <mat-card-title>Author: {{ comment.user.displayName }}</mat-card-title>
+        </mat-card-title-group>
+        <hr>
+        <b>Comment: </b>
+        <mat-card-content class="text"> {{ comment['text'] }}</mat-card-content>
+      </mat-card>
+    </div>
   </div>
+
+  <div *ngIf="!(user | async) else createComment" class="txt">
+    <h3>If you want to leave a comment, login to you profile</h3>
+  </div>
+
+  <ng-template  #createComment>
+    <div style="width: 300px; margin: 20px">
+      <h2>Please leave a comment</h2>
+      <form #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()" class="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your comment</mat-label>
+          <input type="text" name="text" autocomplete="username"
+                 matInput required ngModel #text="ngModel">
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">
+          ADD
+        </button>
+      </form>
+    </div>
+  </ng-template>
 </div>
+
 

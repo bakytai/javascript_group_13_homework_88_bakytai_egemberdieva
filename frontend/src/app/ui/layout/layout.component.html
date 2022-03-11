@@ -4,7 +4,7 @@
       <div>
         <a routerLink="/" mat-raised-button>Forum</a>
       </div>
-      <nav>
+      <nav *ngIf="!(user | async) else userMenu">
         <a mat-button routerLink="/register">REGISTER</a>
         <a mat-button routerLink="/login">SIGN IN</a>
       </nav>
@@ -17,11 +17,11 @@
 
 <ng-template #userMenu>
   <nav>
+    <a routerLink="/new/post" mat-raised-button>New Post</a>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Profile</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </nav>

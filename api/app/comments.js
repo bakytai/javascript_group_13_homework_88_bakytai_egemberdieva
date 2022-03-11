@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
             query.post = req.query.post;
         }
 
-        const comments = await Comment.find(query);
+        const comments = await Comment.find(query).populate("user", "displayName");
 
         return res.send(comments);
     } catch (e) {
@@ -33,7 +33,7 @@ router.post('/', auth, async (req, res, next) => {
 
         await comment.save();
 
-        return res.send({message: 'Created new comment', id: post._id});
+        return res.send(comment);
     } catch (e) {
         next(e);
     }

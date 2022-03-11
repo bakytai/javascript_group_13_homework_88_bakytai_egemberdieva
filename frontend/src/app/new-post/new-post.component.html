@@ -1,1 +1,24 @@
-<p>new-post works!</p>
+<div class="form">
+  <form  #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input type="text" name="title" autocomplete="off"
+             matInput  ngModel #title="ngModel">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input type="text" name="description" autocomplete="off"
+              matInput ngModel #description="ngModel">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Image</mat-label>
+      <app-file-input name="image" ngModel></app-file-input>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">
+      CREATE NEW POST
+    </button>
+  </form>
+</div>

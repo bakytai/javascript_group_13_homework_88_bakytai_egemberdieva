@@ -16,6 +16,7 @@ export interface PostData {
   title: string;
   description: string;
   image: File | null;
+  user: User
 }
 
 export interface ApiPostData {

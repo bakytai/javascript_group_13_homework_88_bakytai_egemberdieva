@@ -34,7 +34,7 @@ export class PostService {
   };
 
 
-  createPost(postData: PostData, token: string) {
+  createPost(postData: PostData) {
     const formData = new FormData();
 
     Object.keys(postData).forEach(key => {
@@ -43,8 +43,8 @@ export class PostService {
       }
     });
 
-    return this.http.post(environment.apiUrl + '/posts', formData, {
-      headers: new HttpHeaders({'Authorization': token})
+    return this.http.post<Post>(environment.apiUrl + '/posts', postData, {
+      headers: new HttpHeaders({'Authorization': postData.user.token})
     });
   }
 }

@@ -19,23 +19,28 @@ const PostSchema = new mongoose.Schema({
         type: String,
         validate: {
             validator: async function (value)  {
-                if (!value) return false
+                if (!this.isModified('description') && this.image) {
+                  this.image.required = true;
+                }
 
-                return true
+                return false;
             },
-        },
-        required: this.validate
+            message: 'You should enter description or image'
+        }
+
     },
     image: {
         type: String,
         validate: {
-            validator: async function (value) {
-                if (!value) return false
-
-                return true
-            }
-        },
-        required: this.validate
+            validator: async function (value)  {
+                if (!this.isModified('image') && this.description) {
+                    this.description.required = true;
+                    return true
+                }
+                return false;
+            },
+            message: 'You should enter description or image'
+        }
     },
 });
 

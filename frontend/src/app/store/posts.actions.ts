@@ -26,10 +26,11 @@ export const fetchPostFailure = createAction(
 
 export const createPostsRequest = createAction(
   '[Posts] Create Request',
-  props<{postData: PostData, token: string}>()
+  props<{postData: PostData}>()
 );
 export const createPostsSuccess = createAction(
-  '[Posts] Create Success'
+  '[Posts] Create Success',
+  props<{post: Post}>()
 );
 export const createPostsFailure = createAction(
   '[Posts] Create Failure',

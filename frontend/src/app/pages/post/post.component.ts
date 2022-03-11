@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Comment } from '../../models/comment.model';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -8,6 +8,7 @@ import { Post } from '../../models/post.model';
 import { fetchPostRequest } from '../../store/posts.actions';
 import { fetchCommentsRequest } from '../../store/comments.actions';
 import { User } from '../../models/user.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-post',
@@ -15,6 +16,7 @@ import { User } from '../../models/user.model';
   styleUrls: ['./post.component.sass']
 })
 export class PostComponent implements OnInit , OnDestroy{
+  @ViewChild('f') form!: NgForm;
   comments: Observable<Comment[]>;
   post: Observable<Post | null>;
   postInfo!: Post;
@@ -53,11 +55,15 @@ export class PostComponent implements OnInit , OnDestroy{
       } else {
         this.token = '';
       }
-    })
+    });
   }
 
   ngOnDestroy() {
     this.postSubscription.unsubscribe();
     this.userSub.unsubscribe();
+  }
+
+  onSubmit() {
+
   }
 }
