@@ -9,7 +9,8 @@ import { ApiPostData, Post, PostData } from '../models/post.model';
 })
 export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getPost() {
     return this.http.get<ApiPostData[]>(environment.apiUrl + '/posts').pipe(
@@ -24,13 +25,10 @@ export class PostService {
   };
 
   getPostInfo(id: string) {
-    return this.http.get<ApiPostData[]>(environment.apiUrl + `/posts/${id}`).pipe(
-      map(response => {
-        return response.map(postData => {
-          return new Post(postData._id, postData.user, postData.date, postData.title, postData.description,
-            postData.image
-          );
-        });
+    return this.http.get<ApiPostData>(environment.apiUrl + `/posts/${id}`).pipe(
+      map(postData => {
+        return new Post(postData._id, postData.user, postData.date, postData.title, postData.description,
+          postData.image)
       })
     );
   };

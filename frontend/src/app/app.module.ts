@@ -24,6 +24,7 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
 import { NewPostComponent } from './new-post/new-post.component';
+import { PostComponent } from './pages/post/post.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NewPostComponent } from './new-post/new-post.component';
     CenteredCardComponent,
     PostsComponent,
     LoginComponent,
-    NewPostComponent
+    NewPostComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
