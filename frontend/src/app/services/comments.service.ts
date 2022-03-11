@@ -22,7 +22,7 @@ export class CommentsService {
   };
 
 
-  createPost(commentData: CommentData, token: string) {
+  createComments(commentData: CommentData, token: string) {
     return this.http.post(environment.apiUrl + '/comments', commentData, {
       headers: new HttpHeaders({'Authorization': token})
     });
