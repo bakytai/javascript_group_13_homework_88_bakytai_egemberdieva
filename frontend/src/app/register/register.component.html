@@ -1,0 +1,20 @@
+<app-centered-card title="Register">
+  <form #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="email" name="email" autocomplete="username"
+             matInput email required ngModel #email="ngModel">
+
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input type="password" name="password" autocomplete="new-password"
+             required matInput ngModel #password="ngModel">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">
+      REGISTER
+    </button>
+  </form>
+</app-centered-card>
