@@ -18,12 +18,9 @@ const PostSchema = new mongoose.Schema({
     description: {
         type: String,
         validate: {
-            validator: async function (value)  {
-                if (!this.isModified('description') && this.image) {
-                  this.image.required = true;
-                }
-
-                return false;
+            validator: function (value)  {
+                if (this.isModified('description') && this.image) return true;
+                if (!this.description && !this.image) return false
             },
             message: 'You should enter description or image'
         }
@@ -32,12 +29,9 @@ const PostSchema = new mongoose.Schema({
     image: {
         type: String,
         validate: {
-            validator: async function (value)  {
-                if (!this.isModified('image') && this.description) {
-                    this.description.required = true;
-                    return true
-                }
-                return false;
+            validator:  function (value)  {
+                if (!this.isModified('image') && this.description) return true;
+                if (!this.description && !this.image) return false;
             },
             message: 'You should enter description or image'
         }
