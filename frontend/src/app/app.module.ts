@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostsComponent } from './pages/posts/posts.component';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
+import { NewPostComponent } from './new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginComponent } from './login/login.component';
     RegisterComponent,
     CenteredCardComponent,
     PostsComponent,
-    LoginComponent
+    LoginComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
