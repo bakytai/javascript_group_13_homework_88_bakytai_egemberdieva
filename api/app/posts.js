@@ -29,6 +29,16 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const postInfo = await Post.findById(req.params.id).populate("user", "displayName");
+
+        return res.send(postInfo);
+    } catch (e) {
+        next(e);
+    }
+});
+
 router.post('/', auth, upload.single('image'), async (req, res, next) => {
     try {
         if (!req.body.title) {
