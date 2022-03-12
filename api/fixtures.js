@@ -27,14 +27,15 @@ const run = async () => {
 
     const [post1, post2] =  await Post.create({
         user: boke,
-        date: '25.10.21',
+        date: '2022-03-12T03:43:48.976Z',
         title: 'good news',
         description: 'news about war of Ukraine',
     }, {
         user: oleg,
-        date: '21.12.21',
+        date: '2022-03-12T03:44:40.013Z',
         title: 'Weather',
         description: 'long description',
+        image: '0jtmLZ7G6vYy8MZX_FO6H.png'
     });
 
     await Comment.create({

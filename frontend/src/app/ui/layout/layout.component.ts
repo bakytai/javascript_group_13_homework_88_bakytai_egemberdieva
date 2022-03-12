@@ -21,13 +21,17 @@ export class LayoutComponent {
       shareReplay()
     );
 
-  user: Observable<null | User>
+  user: Observable<null | User>;
+  userInfo!: User;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>,
     private router: Router) {
     this.user = store.select(state => state.users.user);
+    this.user.subscribe(user => {
+      this.userInfo = <User>user;
+    })
   }
 
   logout() {

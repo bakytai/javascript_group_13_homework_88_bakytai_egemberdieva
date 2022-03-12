@@ -21,7 +21,7 @@ const upload = multer({storage});
 
 router.get('/', async (req, res, next) => {
     try {
-        const posts = await Post.find().populate("user", "displayName");
+        const posts = await Post.find().sort({date:-1}).populate("user", "displayName");
 
         return res.send(posts);
     } catch (e) {

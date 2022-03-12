@@ -16,6 +16,7 @@
 </mat-sidenav-container>
 
 <ng-template #userMenu>
+  <span>Hello, {{ userInfo.displayName }}!</span>
   <nav>
     <a routerLink="/new/post" mat-raised-button>New Post</a>
     <button mat-icon-button [matMenuTriggerFor]="menu">
