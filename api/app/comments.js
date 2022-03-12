@@ -26,8 +26,12 @@ router.post('/', auth, async (req, res, next) => {
             return res.status(400).send({message: 'Text are required'});
         }
 
-        const commentData = req.body;
-        commentData.user = req.user._id;
+        const commentData = {
+            text: req.body.text,
+            post: req.body.post,
+            user: req.user._id,
+        };
+
 
         const comment = new Comment(commentData);
 

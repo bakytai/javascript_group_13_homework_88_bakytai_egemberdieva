@@ -38,7 +38,7 @@ router.post('/sessions', async (req, res, next) => {
         user.generateToken();
         await user.save();
 
-        return  res.send({user});
+        return  res.send(user);
     } catch (e) {
         next(e);
     }

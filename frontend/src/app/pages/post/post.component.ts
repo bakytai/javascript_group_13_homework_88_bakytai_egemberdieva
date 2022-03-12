@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Comment } from '../../models/comment.model';
+import { Comment, CommentData } from '../../models/comment.model';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../../store/types';
 import { Post } from '../../models/post.model';
 import { fetchPostRequest } from '../../store/posts.actions';
-import { fetchCommentsRequest } from '../../store/comments.actions';
+import { createCommentsRequest, fetchCommentsRequest } from '../../store/comments.actions';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
 
@@ -17,53 +17,58 @@ import { NgForm } from '@angular/forms';
 })
 export class PostComponent implements OnInit , OnDestroy{
   @ViewChild('f') form!: NgForm;
-  comments: Observable<Comment[]>;
-  post: Observable<Post | null>;
-  postInfo!: Post;
-  postSubscription!: Subscription;
   loading: Observable<boolean>;
-  error: Observable<null | string>;
+  error: Observable<string | null>;
   user: Observable<null | User>;
   userSub!: Subscription;
-  postId!: string;
+  post: Observable<null | Post>;
+  postSub!: Subscription;
   token!: string;
-
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
-    this.post = store.select(state => state.posts.post);
+  userO!: User;
+  postInfo!: Post | null;
+  comments: Observable<Comment[]>
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute
+  ) {
     this.comments = store.select(state => state.comments.comments);
     this.loading = store.select(state => state.comments.fetchLoading);
     this.error = store.select(state => state.comments.fetchError);
     this.user = store.select(state => state.users.user);
+    this.post = store.select(state => state.posts.post);
   }
-
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.postId = params['id']
-    })
-    this.store.dispatch(fetchPostRequest({id: this.postId}));
-    this.store.dispatch(fetchCommentsRequest({id: this.postId}));
-
-    this.postSubscription = this.post.subscribe(post => {
-      if (post) {
-        this.postInfo = post;
-      }
-    });
-
+    this.store.dispatch(fetchPostRequest({id: this.route.snapshot.params['id']}));
+    this.store.dispatch(fetchCommentsRequest({id: this.route.snapshot.params['id']}));
     this.userSub = this.user.subscribe(user => {
+
       if (user) {
-        this.token = user.token;
+
+        console.log({user})
       } else {
         this.token = '';
       }
     });
+    this.postSub = this.post.subscribe(post => {
+      if (post) {
+        console.log(post)
+        this.postInfo = post;
+      } else {
+        this.postInfo = null;
+      }
+    });
+  }
+  onSubmit() {
+    const commentData: CommentData = {
+      text: this.form.form.value.text,
+      post: this.route.snapshot.params['id'],
+    }
+    const token = this.token;
+    this.store.dispatch(createCommentsRequest({commentData, token}));
   }
 
   ngOnDestroy() {
-    this.postSubscription.unsubscribe();
+    this.postSub.unsubscribe();
     this.userSub.unsubscribe();
-  }
-
-  onSubmit() {
-
   }
 }

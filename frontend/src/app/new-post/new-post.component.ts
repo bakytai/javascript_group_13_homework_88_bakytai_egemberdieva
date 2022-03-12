@@ -4,9 +4,8 @@ import { PostData } from '../models/post.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { createPostsRequest } from '../store/posts.actions';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-post',
@@ -16,7 +15,6 @@ import { Router } from '@angular/router';
 export class NewPostComponent {
   @ViewChild('f') form!: NgForm;
   user: Observable<null | User>;
-  userSub!: Subscription;
   userObj!: User;
   token!: string;
 

@@ -18,6 +18,13 @@
       <mat-error *ngIf="password.touched && password.hasError('password')">Password is required</mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="outline">
+      <mat-label>Display</mat-label>
+      <input type="text" name="displayName" autocomplete="off"
+             required matInput ngModel #displayName="ngModel">
+      <mat-error *ngIf="displayName.touched && displayName.hasError('displayName')">Name is required</mat-error>
+    </mat-form-field>
+
     <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">
       REGISTER
     </button>

@@ -26,7 +26,7 @@ export class CommentsEffects {
 
   createComments = createEffect(() => this.actions.pipe(
     ofType(createCommentsRequest),
-    mergeMap(({commentsData, token}) => this.commentsService.createComments(commentsData, token).pipe(
+    mergeMap(({commentData, token}) => this.commentsService.createComments(commentData, token).pipe(
       map(() => createCommentsSuccess()),
       tap(() => this.router.navigate(['/'])),
       catchError(() => of(createCommentsFailure({error: 'Wrong Data'})))

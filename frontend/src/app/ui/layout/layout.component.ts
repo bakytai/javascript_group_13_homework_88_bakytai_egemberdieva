@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { logoutUser } from '../../store/users.actions';
 import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -24,11 +25,13 @@ export class LayoutComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private store: Store<AppState>) {
+    private store: Store<AppState>,
+    private router: Router) {
     this.user = store.select(state => state.users.user);
   }
 
   logout() {
     this.store.dispatch(logoutUser());
+    void this.router.navigate(['/']);
   }
 }
