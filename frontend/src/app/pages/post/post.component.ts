@@ -65,6 +65,7 @@ export class PostComponent implements OnInit , OnDestroy{
     }
 
     this.store.dispatch(createCommentsRequest({commentData: comment}));
+    this.store.dispatch(fetchCommentsRequest({id: this.route.snapshot.params['id']}));
   }
 
   ngOnDestroy() {

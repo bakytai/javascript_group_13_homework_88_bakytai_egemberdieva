@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { catchError, mergeMap, of, tap } from 'rxjs';
+import { catchError, mergeMap, of } from 'rxjs';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommentsService } from '../services/comments.service';
@@ -28,7 +28,6 @@ export class CommentsEffects {
     ofType(createCommentsRequest),
     mergeMap(({commentData}) => this.commentsService.createComments(commentData).pipe(
       map(() => createCommentsSuccess()),
-      tap(() => this.router.navigate(['/'])),
       catchError(() => of(createCommentsFailure({error: 'Wrong Data'})))
     ))
   ));

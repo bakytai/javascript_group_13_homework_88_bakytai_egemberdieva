@@ -43,7 +43,7 @@ export class PostService {
       }
     });
 
-    return this.http.post<Post>(environment.apiUrl + '/posts', postData, {
+    return this.http.post<Post>(environment.apiUrl + '/posts', formData, {
       headers: new HttpHeaders({'Authorization': postData.user.token})
     });
   }
