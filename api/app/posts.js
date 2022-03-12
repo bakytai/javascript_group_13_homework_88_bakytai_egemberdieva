@@ -31,7 +31,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const postInfo = await Post.findById(req.params.id).populate("user", "displayName token");
+        const postInfo = await Post.findById(req.params.id).populate("user", "displayName");
 
         return res.send(postInfo);
     } catch (e) {

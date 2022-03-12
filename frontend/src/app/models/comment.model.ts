@@ -11,6 +11,7 @@ export class Comment {
 export interface CommentData {
   post: string;
   text: string;
+  user: User
 }
 
 export interface ApiCommentData {

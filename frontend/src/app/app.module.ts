@@ -36,6 +36,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateRequiredDirective } from './validate-required.directive';
+import { ImagePipe } from './pipes/image.pipe';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -57,7 +58,8 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
     NewPostComponent,
     PostComponent,
     FileInputComponent,
-    ValidateRequiredDirective
+    ValidateRequiredDirective,
+    ImagePipe
   ],
   imports: [
     BrowserModule,

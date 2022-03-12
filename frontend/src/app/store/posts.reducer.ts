@@ -43,3 +43,4 @@ export const postsReducer = createReducer(
     createLoading: false,
     createError: error})),
 )
+

@@ -20,11 +20,10 @@ export class PostComponent implements OnInit , OnDestroy{
   loading: Observable<boolean>;
   error: Observable<string | null>;
   user: Observable<null | User>;
-  userSub!: Subscription;
   post: Observable<null | Post>;
   postSub!: Subscription;
   token!: string;
-  userO!: User;
+  userObj!: User;
   postInfo!: Post | null;
   comments: Observable<Comment[]>
   constructor(
@@ -36,39 +35,39 @@ export class PostComponent implements OnInit , OnDestroy{
     this.error = store.select(state => state.comments.fetchError);
     this.user = store.select(state => state.users.user);
     this.post = store.select(state => state.posts.post);
+    this.user.subscribe(user => {
+      this.userObj = <User>user
+    })
   }
   ngOnInit(): void {
     this.store.dispatch(fetchPostRequest({id: this.route.snapshot.params['id']}));
     this.store.dispatch(fetchCommentsRequest({id: this.route.snapshot.params['id']}));
-    this.userSub = this.user.subscribe(user => {
-
-      if (user) {
-
-        console.log({user})
-      } else {
-        this.token = '';
-      }
-    });
     this.postSub = this.post.subscribe(post => {
       if (post) {
-        console.log(post)
         this.postInfo = post;
       } else {
         this.postInfo = null;
       }
     });
   }
+
+
   onSubmit() {
-    const commentData: CommentData = {
+    const comment: CommentData = {
       text: this.form.form.value.text,
       post: this.route.snapshot.params['id'],
+      user: {
+        _id: this.userObj._id,
+        email: this.userObj.email,
+        displayName: this.userObj.displayName,
+        token: this.userObj.token
+      }
     }
-    const token = this.token;
-    this.store.dispatch(createCommentsRequest({commentData, token}));
+
+    this.store.dispatch(createCommentsRequest({commentData: comment}));
   }
 
   ngOnDestroy() {
     this.postSub.unsubscribe();
-    this.userSub.unsubscribe();
   }
 }

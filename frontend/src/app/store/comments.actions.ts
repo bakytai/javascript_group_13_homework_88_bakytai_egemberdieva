@@ -17,7 +17,7 @@ export const fetchCommentsFailure = createAction(
 
 export const createCommentsRequest = createAction(
   '[Comments] Create Request',
-  props<{commentData: CommentData, token: string}>()
+  props<{commentData: CommentData}>()
 );
 export const createCommentsSuccess = createAction(
   '[Comments] Create Success'
