@@ -35,6 +35,7 @@ import { CommentsEffects } from './store/commnets.effects';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FileInputComponent } from './ui/file-input/file-input.component';
+import { ValidateRequiredDirective } from './validate-required.directive';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -55,7 +56,8 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
     LoginComponent,
     NewPostComponent,
     PostComponent,
-    FileInputComponent
+    FileInputComponent,
+    ValidateRequiredDirective
   ],
   imports: [
     BrowserModule,

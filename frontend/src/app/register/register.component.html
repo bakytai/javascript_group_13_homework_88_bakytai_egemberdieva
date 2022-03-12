@@ -1,5 +1,6 @@
 <app-centered-card title="Register">
-  <form #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()"
+        >
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input type="email" name="email" autocomplete="username"

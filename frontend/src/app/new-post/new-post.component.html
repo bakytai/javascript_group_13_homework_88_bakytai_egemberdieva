@@ -1,5 +1,6 @@
 <div class="form">
-  <form  #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()">
+  <form  #f="ngForm" fxLayout="column" autocomplete="off"
+         [appValidateRequired]="['description', 'image']" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
       <mat-label>Title</mat-label>
       <input type="text" name="title" autocomplete="off"
